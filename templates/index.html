@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Tracker</title>
+</head>
+<body>
+    <h1>Finance Tracker</h1>
+
+    <form method="POST" action="{{ url_for('add_transaction') }}">
+        <label for="date">Date:</label>
+        <input type="text" name="date" placeholder="YYYY-MM-DD" required>
+        <label for="amount">Amount:</label>
+        <input type="number" name="amount" step="0.01" required>
+        <label for="category">Category:</label>
+        <input type="text" name="category" required>
+        <label for="description">Description:</label>
+        <input type="text" name="description">
+        <button type="submit">Add Transaction</button>
+    </form>
+
+    <h2>Transactions</h2>
+    <ul>
+        {% for transaction in transactions %}
+            <li>
+                {{ transaction.date }} - {{ transaction.category }} - {{ transaction.amount }} 
+                <a href="{{ url_for('delete_transaction', id=transaction.id) }}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
