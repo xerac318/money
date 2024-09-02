@@ -19,7 +19,8 @@ class Transaction(db.Model):
     description = db.Column(db.String(100), nullable=True)
 
 # 데이터베이스 테이블 생성
-db.create_all()
+with app.app_context():
+    db.create_all()
 
 @app.route('/')
 def index():
